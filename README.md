@@ -366,7 +366,7 @@ In de `AuthService` wordt de gebruiker opgehaald uit de database en wordt het wa
 
 Je ziet dat er gebruikt wordt gemaakt van `BCrypt.Net` om het wachtwoord te controleren. `BCrypt.Net` is een library die je kunt gebruiken om wachtwoorden te hashen en te verifieren.
 
-Je ziet dat we hier gebruik maken van de `TokenService` om de JWT token te genereren. De `TokenService` wordt doormiddel van dependency injection geïnjecteerd in de `AuthService`.
+Daarnaast maken we gebruik maken van de `TokenService` om de JWT token te genereren. De `TokenService` wordt doormiddel van dependency injection geïnjecteerd in de `AuthService`.
 
 ```csharp
 public class TokenService(IConfiguration configuration)
