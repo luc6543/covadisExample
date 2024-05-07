@@ -19,9 +19,8 @@ We ontwikkelen drie applicaties
 - **Backoffice**: De backoffice is een Windows Form App. Deze app is verantwoordelijk voor het beheren van de data en het exporteren van de data naar Excel.
 
 # MoSCoW
-Er zijn functionaliteiten uitgewerkt volgens MoSCoW die staan in het Word document. Als je meer wilt weten over MoSCoW zelf kun je die informatie hier vinden: [link](https://www.icm.nl/extra/wat-is-de-moscow-methode/).
-
-MoSCoW staat voor:
+[MoSCoW](https://www.icm.nl/extra/wat-is-de-moscow-methode/).
+Er zijn functionaliteiten uitgewerkt volgens MoSCoW die staan in het Word document. MoSCoW staat voor:
 - Must have
 - Should have
 - Could have
