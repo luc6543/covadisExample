@@ -1,6 +1,7 @@
 namespace GraafschapCollege.Api;
 
 using GraafschapCollege.Api.Context;
+using GraafschapCollege.Api.Seeders;
 using GraafschapCollege.Api.Services;
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -11,7 +12,7 @@ using Microsoft.OpenApi.Models;
 
 using System.Text;
 
-public class Program
+public static class Program
 {
     public static void Main(string[] args)
     {
@@ -98,6 +99,15 @@ public class Program
         app.UseAuthorization();
 
         app.MapControllers();
+
+        // Get the database context and apply migrations automatically and seed the database
+        using (var scope = app.Services.CreateScope())
+        {
+            var scopedServices = scope.ServiceProvider;
+            var dbContext = scopedServices.GetRequiredService<GraafschapCollegeDbContext>();
+            dbContext.Database.Migrate();
+            dbContext.Seed();
+        }
 
         app.Run();
     }

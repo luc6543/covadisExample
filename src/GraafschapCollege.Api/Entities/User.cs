@@ -1,7 +1,10 @@
 ﻿namespace GraafschapCollege.Api.Entities;
 
+using Microsoft.EntityFrameworkCore;
+
 using System.ComponentModel.DataAnnotations;
 
+[Index(nameof(Email), IsUnique = true)]
 public class User
 {
     [Key]
@@ -15,4 +18,6 @@ public class User
 
     [Required]
     public string Password { get; set; }
+
+    public virtual ICollection<Role> Roles { get; set; }
 }

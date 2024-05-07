@@ -4,11 +4,15 @@ using GraafschapCollege.Api.Context;
 using GraafschapCollege.Shared.Requests;
 using GraafschapCollege.Shared.Responses;
 
+using Microsoft.EntityFrameworkCore;
+
 public class AuthService(GraafschapCollegeDbContext dbContext, TokenService tokenService)
 {
     public AuthResponse? Login(LoginRequest request)
     {
-        var user = dbContext.Users.FirstOrDefault(x => x.Email == request.Email);
+        var user = dbContext.Users
+            .Include(x => x.Roles)
+            .FirstOrDefault(x => x.Email == request.Email);
 
         if (user == null)
         {

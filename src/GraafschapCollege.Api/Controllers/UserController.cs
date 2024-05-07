@@ -2,7 +2,6 @@ namespace Covadis.Api.Controllers;
 
 using GraafschapCollege.Api.Entities;
 using GraafschapCollege.Api.Services;
-using GraafschapCollege.Shared.Responses;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -20,7 +19,6 @@ public class UserController(UserService userService) : ControllerBase
     }
 
     [HttpGet("{id}")]
-    [ProducesResponseType(typeof(UserResponse), StatusCodes.Status200OK)]
     public IActionResult GetUser(int id)
     {
         var user = userService.GetUserById(id);
@@ -33,8 +31,8 @@ public class UserController(UserService userService) : ControllerBase
         return Ok(user);
     }
 
+    [Authorize(Roles = Role.Administrator)]
     [HttpPost]
-    [ProducesResponseType(typeof(UserResponse), StatusCodes.Status201Created)]
     public IActionResult CreateUser(User user)
     {
         var createdUser = userService.CreateUser(user);
@@ -43,7 +41,6 @@ public class UserController(UserService userService) : ControllerBase
     }
 
     [HttpPut("{id}")]
-    [ProducesResponseType(typeof(UserResponse), StatusCodes.Status200OK)]
     public IActionResult UpdateUser(int id, User user)
     {
         var updatedUser = userService.UpdateUser(id, user);
