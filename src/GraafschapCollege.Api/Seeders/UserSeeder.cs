@@ -17,16 +17,18 @@ public static class UserSeeder
 
         var users = new List<User>
         {
-            new() {
+            new()
+            {
                 Name = "Bryan Schoot",
                 Email = "b.schoot@example.com",
-                Password = "Password123!",
+                Password =  BCrypt.Net.BCrypt.HashPassword("Password123!"),
                 Roles = [roles.Find(x => x.Name == Role.Administrator)!]
             },
-            new() {
+            new()
+            {
                 Name = "John Doe",
                 Email = "j.doe@example.com",
-                Password = "Password123!",
+                Password =  BCrypt.Net.BCrypt.HashPassword("Password123!"),
                 Roles = [roles.Find(x => x.Name == Role.Employee)!]
             }
         };

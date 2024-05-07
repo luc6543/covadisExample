@@ -2,6 +2,7 @@ namespace Covadis.Api.Controllers;
 
 using GraafschapCollege.Api.Entities;
 using GraafschapCollege.Api.Services;
+using GraafschapCollege.Shared.Requests;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -21,23 +22,23 @@ public class UserController(UserService userService) : ControllerBase
     [HttpGet("{id}")]
     public IActionResult GetUser(int id)
     {
-        var user = userService.GetUserById(id);
+        var response = userService.GetUserById(id);
 
-        if (user == null)
+        if (response == null)
         {
             return NotFound();
         }
 
-        return Ok(user);
+        return Ok(response);
     }
 
     [Authorize(Roles = Role.Administrator)]
     [HttpPost]
-    public IActionResult CreateUser(User user)
+    public IActionResult CreateUser(CreateUserRequest request)
     {
-        var createdUser = userService.CreateUser(user);
+        var response = userService.CreateUser(request);
 
-        return CreatedAtAction(nameof(CreateUser), new { id = createdUser.Id }, createdUser);
+        return CreatedAtAction(nameof(CreateUser), new { id = response.Id }, response);
     }
 
     [HttpPut("{id}")]

@@ -12,14 +12,9 @@ public class AuthService(GraafschapCollegeDbContext dbContext, TokenService toke
     {
         var user = dbContext.Users
             .Include(x => x.Roles)
-            .FirstOrDefault(x => x.Email == request.Email);
+            .SingleOrDefault(x => x.Email == request.Email);
 
-        if (user == null)
-        {
-            return null;
-        }
-
-        if (user.Password != request.Password)
+        if (user == null || !BCrypt.Net.BCrypt.Verify(request.Password, user.Password))
         {
             return null;
         }
