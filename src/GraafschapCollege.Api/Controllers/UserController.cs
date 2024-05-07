@@ -32,7 +32,6 @@ public class UserController(UserService userService) : ControllerBase
         return Ok(response);
     }
 
-    [Authorize(Roles = Role.Administrator)]
     [HttpPost]
     public IActionResult CreateUser(CreateUserRequest request)
     {
@@ -52,5 +51,12 @@ public class UserController(UserService userService) : ControllerBase
         }
 
         return Ok(updatedUser);
+    }
+
+    [Authorize(Roles = Role.Administrator)]
+    [HttpGet("secret")]
+    public IActionResult Secret()
+    {
+        return Ok("This is a secret message");
     }
 }

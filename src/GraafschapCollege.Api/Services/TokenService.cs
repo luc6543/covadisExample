@@ -16,12 +16,12 @@ public class TokenService(IConfiguration configuration)
     {
         var claims = new List<Claim>
         {
-            new(ClaimTypes.NameIdentifier, user.Id.ToString()),
-            new(ClaimTypes.Name, user.Name),
-            new(ClaimTypes.Email, user.Email),
+            new("id", user.Id.ToString()),
+            new("name", user.Name),
+            new("email", user.Email),
         };
 
-        claims.AddRange(user.Roles.Select(role => new Claim(ClaimTypes.Role, role.Name)));
+        claims.AddRange(user.Roles.Select(role => new Claim("role", role.Name)));
 
         var signingCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
 
